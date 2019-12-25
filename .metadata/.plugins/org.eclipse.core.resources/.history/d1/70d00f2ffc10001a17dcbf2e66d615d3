@@ -1,0 +1,5 @@
+package com.capgemini.um.dao;
+
+public interface AdministrativeDAO {
+
+}

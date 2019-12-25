@@ -1,0 +1,60 @@
+package com.capgemini.um.controller;
+
+import java.util.Scanner;
+import com.capgemini.um.data.ApplicantDetails;
+import com.capgemini.um.data.Course;
+
+public class HomeConsoleTest {
+	public static void main(String[] args) {
+		int userChoice = 0;
+
+		while (true) {
+
+			Scanner sc = new Scanner(System.in);
+
+			System.out.println("*******University of Programming*******");
+			System.out.println("	1: Applicants");
+			System.out.println("	2: Memmber of Admission Committee");
+			System.out.println("	3: Administrator");
+			System.out.println("	4: Exit");
+
+			System.out.println("Choose ur option?");
+			userChoice = sc.nextInt();
+
+			if (userChoice == 1) {
+				System.out.println("****Applicant's Choice****");
+				System.out.println("	1: View All Programs");
+				System.out.println("	2: View Application status");
+
+				int applChoice = sc.nextInt();
+				// condition for applicant
+				if (applChoice == 1) {
+					Course course = new Course();
+					course.applCourse();
+					System.out.println("##### Enter courseId to apply #####");
+					int selectCourse = sc.nextInt();
+					// condition for course selection
+					if (selectCourse == course.courseId) {
+						ApplicantDetails applicantDetails = new ApplicantDetails();
+						applicantDetails.ApplDetails();
+					} else {
+						System.out.println("Invalid choice");
+					}
+				} else if (applChoice == 2) {
+
+				} else {
+					System.out.println(" Invalid Choice ");
+				} // End of applicant conditions
+
+			} else if (userChoice == 2) {
+
+			} else if (userChoice == 3) {
+
+			} else if (userChoice == 4) {
+				System.exit(0);
+			} else {
+				System.out.println("Invalid Choice..");
+			}
+		}
+	} // End of main()
+}// End of class

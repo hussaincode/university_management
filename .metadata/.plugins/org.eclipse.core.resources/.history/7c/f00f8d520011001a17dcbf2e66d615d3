@@ -1,0 +1,41 @@
+package com.capgemini.um.beans;
+
+public class AdministrativeBean {
+	private String adminName;
+	private int adminId;
+	private String adminPassword;
+	private String adminEmail;
+	
+	public String getOwnerName() {
+		return adminName;
+	}
+	public void setOwnerName(String ownerName) {
+		this.adminName = ownerName;
+	}
+	public int getOwnerId() {
+		return adminId;
+	}
+	public void setOwnerId(int ownerId) {
+		this.adminId = ownerId;
+	}
+	public String getOwnerPassword() {
+		return adminPassword;
+	}
+	public void setOwnerPassword(String ownerPassword) {
+		this.adminPassword = ownerPassword;
+	}
+	public String getOwnerEmail() {
+		return adminEmail;
+	}
+	public void setOwnerEmail(String ownerEmail) {
+		this.adminEmail = ownerEmail;
+	}
+	
+	@Override
+	public String toString() {
+		return "Owner [ownerName=" + adminName + "\n ownerId=" + adminId + "\n ownerEmail=" + adminEmail + "]";
+	}
+	
+}
+
+

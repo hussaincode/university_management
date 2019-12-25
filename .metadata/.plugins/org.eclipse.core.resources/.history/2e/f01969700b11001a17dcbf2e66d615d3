@@ -1,0 +1,14 @@
+package com.capgemini.um.dao;
+
+import com.capgemini.um.beans.CourseOfferedBean;
+
+public interface CourseOfferedDAO {
+
+	public CourseOfferedBean setCourseOffered();
+
+	public CourseOfferedBean getCourseOffered();
+	
+	public boolean createCourse(CourseOfferedBean courseOfferedBean);
+	public boolean delteCourse(int courseId);
+	
+}

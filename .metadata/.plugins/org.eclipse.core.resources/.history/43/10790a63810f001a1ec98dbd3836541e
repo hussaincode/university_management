@@ -1,0 +1,60 @@
+package com.capgemini.um.dao;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import com.capgemini.um.beans.ApplicationBean;
+
+public class ApplicationDAOImpl implements ApplicationDAO {
+	
+
+	private static List<ApplicationBean> applicationsList; 
+	static {
+		applicationsList = new ArrayList<>();
+		int applicationId=(int) Math.random();
+		ApplicationBean applicationBean = new ApplicationBean();
+		applicationBean.setApplicationId(applicationId);
+		applicationBean.setFullName("Nazia");
+		applicationBean.setCourseId(101);
+		applicationBean.setDob("11/12/1997");
+		applicationBean.setHqualification("Be");
+		applicationBean.setMarksObtained(72.25);
+		applicationBean.setGoals("CTO");
+		applicationBean.setEmailId("nazia143@saddam.com");
+		applicationsList.add(applicationBean);
+		
+		
+		
+	}
+	
+	@Override
+	public void setApplication() {
+		ApplicationBean applicationBean = new ApplicationBean();
+
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Your Full Name");
+		applicationBean.setFullName(sc.nextLine());
+		System.out.println("Enter Your Date of Birth");
+		applicationBean.setDob(sc.nextLine());
+		System.out.println("Enter Your Highest Qualification");
+		applicationBean.setHqualification(sc.nextLine());
+		System.out.println("Enter Marks Obtained");
+		applicationBean.setMarksObtained(sc.nextDouble());
+		System.out.println("Enter Your Goals");
+		applicationBean.setGoals(sc.next());
+		System.out.println("Enter Your Email ID");
+		applicationBean.setEmailId(sc.next());
+		
+		applicationsList.add(applicationBean);
+		System.out.println("*****Thanx for applying for this course*****");
+		
+		
+	}// End of setApplication
+
+	@Override
+	public List<ApplicationBean> getApplication() {	
+		
+		return applicationsList;
+	}// End of getApplication
+
+}// End of class

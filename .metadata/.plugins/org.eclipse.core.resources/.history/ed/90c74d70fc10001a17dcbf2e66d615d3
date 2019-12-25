@@ -1,0 +1,7 @@
+package com.capgemini.um.dao;
+
+public interface AdministrativeDAO {
+	public boolean userMaster login(Integer userid,String password);
+	public Boolean deleteUser(int user_id) throws DeleteUserException;
+	public Boolean deleteOwner(int ownerId) throws DeleteOwnerException;
+}

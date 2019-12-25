@@ -1,0 +1,183 @@
+package com.capgemini.um.controller;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
+
+import com.capgemini.um.beans.ApplicationBean;
+import com.capgemini.um.beans.CourseBean;
+import com.capgemini.um.beans.CourseOfferedBean;
+import com.capgemini.um.dao.AdministrativeDAOImp;
+import com.capgemini.um.dao.ApplicationDAOImpl;
+import com.capgemini.um.dao.CourseOfferedDAOImpl;
+import com.capgemini.um.dao.MacDAOImpl;
+
+public class HomeConsoleTest {
+	public static void main(String[] args) {
+		//ApplicationDAOImpl appDaoImpl = new ApplicationDAOImpl();
+		ApplicationDAOImpl applicationDAOImpl = new ApplicationDAOImpl();
+		CourseOfferedDAOImpl courseOfferedDAOImpl = new CourseOfferedDAOImpl();
+		int userChoice = 0;
+		boolean result;
+		int courseId;
+
+		while (true) {
+
+			Scanner sc = new Scanner(System.in);
+
+			System.out.println("*******University of Programming*******");
+			System.out.println("	1: Applicants");
+			System.out.println("	2: Memmber of Admission Committee");
+			System.out.println("	3: Administrator");
+			System.out.println("	4: Exit");
+
+			System.out.println("Choose ur option?");
+			userChoice = sc.nextInt();
+
+			if (userChoice == 1) {
+				System.out.println("****Applicant's Choice****");
+				System.out.println("	1: View All Programs");
+				System.out.println("	2: View Application status");
+
+				int applChoice = sc.nextInt();
+				// condition for applicant
+				if (applChoice == 1) {
+					 courseOfferedDAOImpl = new CourseOfferedDAOImpl();
+					courseOfferedDAOImpl.setCourseOffered();
+					System.out.println("##### Enter courseId to apply #####");
+					 int selectCourse = sc.nextInt();
+					// condition for course selection
+					if (selectCourse == 101 || selectCourse == 102 || selectCourse == 103 || selectCourse == 104
+							|| selectCourse == 105 || selectCourse == 106) {
+						applicationDAOImpl.setApplication();
+					} else {
+						System.out.println("Invalid choice");
+					}
+				} else if (applChoice == 2) {
+					
+					applicationDAOImpl.view();
+					
+					
+
+				} else {
+					System.out.println(" Invalid Choice ");
+				} // End of applicant conditions
+
+			} else if (userChoice == 2) {
+				System.out.println("Enter ur UserName");
+				String userName = sc.next();
+				System.out.println("Enter ur Password");
+				String password = sc.next();
+				MacDAOImpl macDAOImpl = new MacDAOImpl();
+				if (macDAOImpl.macLogin(userName, password)) {
+					System.out.println("************************");
+					System.out.println("1 : View All Applications");
+					System.out.println("2: View Application for Specific Program");
+					userChoice = sc.nextInt();
+					if (userChoice == 1) {
+						List<ApplicationBean> appList = applicationDAOImpl.getApplication();
+						for (ApplicationBean applicationBean : appList) {
+							System.out.println(applicationBean.getApplicationId());
+							System.out.println(applicationBean.getFullName());
+							System.out.println(applicationBean.getCourseId());
+							System.out.println(applicationBean.getDob());
+							System.out.println(applicationBean.getEmailId());
+							System.out.println(applicationBean.getGoals());
+							System.out.println(applicationBean.getMarksObtained());
+							System.out.println(applicationBean.getHqualification());
+							System.out.println("**************************************");
+						}
+					} else if (userChoice == 2) {
+						
+						
+						applicationDAOImpl.check();
+						
+						//List<ApplicationBean> appList = applicationDAOImpl.getApplication();
+						//Iterator<ApplicationBean> it = 
+						
+					}
+				} else {
+					System.out.println("Invalid User / pwd");
+				}
+
+			} // End of Mac condition
+			else if (userChoice == 3) {
+				System.out.println("Enter ur UserName");
+				String adminEmail = sc.next();
+				System.out.println("Enter ur Password");
+				String adminPassword = sc.next();
+				AdministrativeDAOImp adDaoImp=new AdministrativeDAOImp();
+				if (adDaoImp.adminLogin(adminEmail, adminPassword)){
+					System.out.println("**********************");
+					System.out.println("1: Add a program");
+					System.out.println("2: Delete a program");
+					System.out.println("3: Show All course Info");
+					System.out.println("4: View List of applicants confirmed/ accepted/ rejected");
+					int adminChoice=sc.nextInt();
+					if(adminChoice==1) {
+						CourseOfferedBean course = new CourseOfferedBean();
+						CourseBean crs = new  CourseBean();
+						boolean checkCourse = true;
+						while (checkCourse) {
+							System.out.println("Enter Course id:");
+							int tempId = sc.nextInt();
+							course.setCourseId(tempId);
+							checkCourse = false;
+							
+						}
+
+						System.out.println("Enter The Course Name:");
+						crs.setCourseName(sc.next());
+						
+						System.out.println("Enter The description:");
+						crs.setCourseDescription(sc.nextLine());
+						
+						System.out.println("Enter The Eligibility:");
+						crs.setEligibility(sc.next()); 
+					
+						
+						System.out.println("Enter The Duration: ");
+						crs.setDuration(sc.nextInt());
+						
+						System.out.println("Enter The Degree certificate");
+						crs.setDegreeCertificate(sc.next());
+
+						result = courseOfferedDAOImpl.createCourse(course);
+						if (result) {
+							System.out.println("Course Data Added");
+
+						} else {
+							System.out.println("Something is Wrong");
+						}
+						break;
+				}
+						else if(adminChoice==2) {
+						System.out.println("Enter Course ID");
+						courseId = sc.nextInt();
+
+						result = courseOfferedDAOImpl.deleteCourse(courseId);
+						
+							if (result) {
+							System.out.println("Course Successfully Deleted");
+						} 
+							else {
+							System.out.println("There is no course with ID:" + courseId);
+						}
+						
+						break;
+						
+					}
+						
+						
+					}
+				
+
+			} // End of Administrative condition
+			else if (userChoice == 4) {
+				System.exit(0);
+			} else {
+				System.out.println("Invalid Choice..");
+			}
+		}
+	} // End of main()
+}// End of class

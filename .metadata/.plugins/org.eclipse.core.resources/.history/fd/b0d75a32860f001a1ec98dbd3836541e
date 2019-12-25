@@ -1,0 +1,45 @@
+package com.capgemini.um.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.capgemini.um.beans.MacBean;
+
+public class MacDAOImpl implements MacDAO {
+	ArrayList<MacBean> macList= new ArrayList<MacBean>();
+
+	@Override
+	public List<MacBean> macData() {
+		MacBean mac1= new MacBean();
+		mac1.setMacEmail("abc");
+		mac1.setMacPassword("123");
+		
+		MacBean mac2= new MacBean();
+		mac1.setMacEmail("hashmi@gmail.com");
+		mac1.setMacPassword("121hashmi");
+		
+		macList.add(mac1);
+		macList.add(mac2);
+		return macList;
+	}
+
+	@Override
+	public int macLogin(String userName, String password) {
+		List<MacBean> loginList = macData();
+		System.out.println(macData());
+		
+		if(loginList != null) {
+			for(MacBean macBean : loginList) {
+				if(userName.equals(macBean.getMacEmail()) && password.equals(macBean.getMacPassword())) {
+					System.out.println("login sccesfully");
+					
+				}else {
+					continue;
+				}
+			}
+			return 0;
+		}
+		return 0;
+	}
+
+}

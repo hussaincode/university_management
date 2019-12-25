@@ -1,0 +1,42 @@
+package com.capgemini.um.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.capgemini.um.beans.AdministrativeBean;
+import com.capgemini.um.beans.MacBean;
+
+public class AdministrativeDAOImp implements AdministrativeDAO{
+	ArrayList<AdministrativeBean> adminList = new ArrayList<AdministrativeBean>();
+
+	@Override
+	public List<AdministrativeBean> adminData() {
+		AdministrativeBean admin1 = new AdministrativeBean();
+		admin1.setOwnerEmail("admin");
+		admin1.setOwnerPassword("12345");
+
+		AdministrativeBean admin2 = new AdministrativeBean();
+		admin2.setOwnerEmail("saddam");
+		admin2.setOwnerPassword("12345");
+		adminList.add(admin1);
+		adminList.add(admin2);
+		return adminList;
+	}
+
+	@Override
+	public boolean adminLogin(String adminEmail, String adminPassword) {
+		List<AdministrativeBean> loginList = adminData();
+		if (loginList != null) {
+			for (AdministrativeBean admBean : loginList) {
+				if (adminEmail.equals(admBean.get) && password.equals(macBean.getMacPassword())) {
+					System.out.println("login sccesfully");
+					return true;
+
+				}
+			}
+		}
+		return false;
+	}
+
+	
+}

@@ -1,0 +1,99 @@
+package com.capgemini.um.controller;
+
+import java.util.List;
+import java.util.Scanner;
+
+import com.capgemini.um.beans.ApplicationBean;
+import com.capgemini.um.dao.ApplicationDAOImpl;
+import com.capgemini.um.dao.CourseOfferedDAOImpl;
+import com.capgemini.um.dao.MacDAOImpl;
+
+public class HomeConsoleTest {
+	public static void main(String[] args) {
+		ApplicationDAOImpl applicationDAOImpl = new ApplicationDAOImpl();
+		int userChoice = 0;
+
+		while (true) {
+
+			Scanner sc = new Scanner(System.in);
+
+			System.out.println("*******University of Programming*******");
+			System.out.println("	1: Applicants");
+			System.out.println("	2: Memmber of Admission Committee");
+			System.out.println("	3: Administrator");
+			System.out.println("	4: Exit");
+
+			System.out.println("Choose ur option?");
+			userChoice = sc.nextInt();
+
+			if (userChoice == 1) {
+				System.out.println("****Applicant's Choice****");
+				System.out.println("	1: View All Programs");
+				System.out.println("	2: View Application status");
+
+				int applChoice = sc.nextInt();
+				// condition for applicant
+				if (applChoice == 1) {
+					CourseOfferedDAOImpl courseOfferedDAOImpl = new CourseOfferedDAOImpl();
+					courseOfferedDAOImpl.setCourseOffered();
+					System.out.println("##### Enter courseId to apply #####");
+					int selectCourse = sc.nextInt();
+					// condition for course selection
+					if (selectCourse == 101 || selectCourse == 102 || selectCourse == 103 || selectCourse == 104
+							|| selectCourse == 105 || selectCourse == 106) {
+						applicationDAOImpl.setApplication();
+					} else {
+						System.out.println("Invalid choice");
+					}
+				} else if (applChoice == 2) {
+					System.out.println(status);
+					
+				} else {
+					System.out.println(" Invalid Choice ");
+				} // End of applicant conditions
+
+			} else if (userChoice == 2) {
+				System.out.println("Enter ur UserName");
+				String userName = sc.next();
+				System.out.println("Enter ur Password");
+				String password = sc.next();
+				MacDAOImpl macDAOImpl = new MacDAOImpl();
+				macDAOImpl.macLogin(userName, password);
+				System.out.println("************************");
+				System.out.println("1 : View Applications");
+				userChoice=sc.nextInt();
+				List<ApplicationBean> appList = applicationDAOImpl.getApplication();
+				for (ApplicationBean applicationBean : appList) {
+					System.out.println(applicationBean.getApplicationId());
+					System.out.println(applicationBean.getFullName());
+					System.out.println(applicationBean.getCourseId());
+					System.out.println(applicationBean.getDob());
+					System.out.println(applicationBean.getEmailId());
+					System.out.println(applicationBean.getGoals());
+					System.out.println(applicationBean.getMarksObtained());
+					System.out.println(applicationBean.getHqualification());
+					System.out.println("**************************************");
+					int accept=sc.nextInt();
+					System.out.println("1: Accept");
+					System.out.println("2: Reject");
+					if(accept==1) {
+						status="";
+					}
+					
+					
+					
+					
+				}
+				
+
+			} else if (userChoice == 3) {
+				
+
+			} else if (userChoice == 4) {
+				System.exit(0);
+			} else {
+				System.out.println("Invalid Choice..");
+			}
+		}
+	} // End of main()
+}// End of class
